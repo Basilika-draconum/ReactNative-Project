@@ -2,6 +2,7 @@ import React from "react";
 import {
   Image,
   ImageBackground,
+  SafeAreaView,
   StyleSheet,
   Text,
   TextInput,
@@ -72,6 +73,7 @@ const styles = StyleSheet.create({
     elevation: 10,
     alignItems: "flex-end",
     justifyContent: "flex-end",
+    position: "absolute",
   },
   addPhoto: {
     borderWidth: 1,
@@ -95,6 +97,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     marginHorizontal: 100,
     alignItems: "center",
+    marginTop: 90,
   },
   input: {
     backgroundColor: "#F6F6F6",
