@@ -40,7 +40,7 @@ const RegistrationScreen = () => {
               style={{
                 ...styles.updateKeyBoarding,
                 ...Platform.select({
-                  android: { marginBottom: isShowKeyBoarding ? 20 : 43 },
+                  android: { marginBottom: isShowKeyBoarding ? 155 : 43 },
                   ios: { marginBottom: isShowKeyBoarding ? 160 : 43 },
                 }),
               }}
@@ -96,15 +96,7 @@ const RegistrationScreen = () => {
                 onPress={keyBoardHide}>
                 <Text style={styles.registerBtnTitle}>Зареєструватися</Text>
               </TouchableOpacity>
-              <Text
-                style={{
-                  ...styles.anchor,
-                  ...Platform.select({
-                    android: { marginBottom: isShowKeyBoarding ? 20 : 144 },
-                  }),
-                }}>
-                Вже є аккаунт? Увійти
-              </Text>
+              <Text style={styles.anchor}>Вже є аккаунт? Увійти</Text>
             </View>
           </View>
         </ImageBackground>

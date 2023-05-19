@@ -36,7 +36,7 @@ const LoginScreen = () => {
               style={{
                 ...styles.updateKeyBoarding,
                 ...Platform.select({
-                  android: { marginBottom: isShowKeyBoarding ? 20 : 43 },
+                  android: { marginBottom: isShowKeyBoarding ? 70 : 43 },
                   ios: { marginBottom: isShowKeyBoarding ? 75 : 43 },
                 }),
               }}
@@ -69,15 +69,7 @@ const LoginScreen = () => {
             <TouchableOpacity style={styles.registerBtn} onPress={keyBoardHide}>
               <Text style={styles.registerBtnTitle}>Увійти</Text>
             </TouchableOpacity>
-            <Text
-              style={{
-                ...styles.anchor,
-                ...Platform.select({
-                  android: { marginBottom: isShowKeyBoarding ? 20 : 144 },
-                }),
-              }}>
-              Немає аккаунта? Зареєструватися
-            </Text>
+            <Text style={styles.anchor}>Немає аккаунта? Зареєструватися</Text>
           </View>
         </ImageBackground>
       </View>
