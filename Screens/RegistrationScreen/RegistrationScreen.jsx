@@ -1,132 +1,116 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Image,
   ImageBackground,
-  SafeAreaView,
-  StyleSheet,
+  Keyboard,
+  KeyboardAvoidingView,
   Text,
   TextInput,
   TouchableOpacity,
   View,
+  Platform,
+  TouchableWithoutFeedback,
 } from "react-native";
 import photoBg from "../../assets/images/photoBG.jpeg";
 import plus from "../../assets/plus.png";
+import { styles } from "./registrationScreenStyles";
 
 const RegistrationScreen = () => {
+  const [isShowKeyBoarding, setIsShowKeyBoarding] = useState(false);
+  const [login, setLogin] = useState(false);
+  const [address, setAddress] = useState(false);
+  const [password, setPassword] = useState(false);
+
+  const keyBoardHide = () => {
+    setIsShowKeyBoarding(false);
+    setAddress(false);
+    setLogin(false);
+    setPassword(false);
+    Keyboard.dismiss();
+  };
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={photoBg}
-        resizeMode="cover"
-        style={styles.backgroundPhoto}>
-        <View style={styles.firstContainer}></View>
-        <View style={styles.innerContainer}>
-          <View style={styles.photoUser}>
-            <View style={styles.addPhoto}>
-              <Image source={plus} style={styles.plus}></Image>
+    <TouchableWithoutFeedback onPress={keyBoardHide}>
+      <View style={styles.container}>
+        <ImageBackground
+          source={photoBg}
+          resizeMode="cover"
+          style={styles.backgroundPhoto}>
+          <View style={styles.innerContainer}>
+            <KeyboardAvoidingView
+              style={{
+                ...styles.updateKeyBoarding,
+                ...Platform.select({
+                  android: { marginBottom: isShowKeyBoarding ? 20 : 43 },
+                  ios: { marginBottom: isShowKeyBoarding ? 160 : 43 },
+                }),
+              }}
+              behavior={Platform.OS === "ios" ? "padding" : "height"}>
+              <View style={styles.photoUser}>
+                <View style={styles.addPhoto}>
+                  <Image source={plus} style={styles.plus}></Image>
+                </View>
+              </View>
+              <Text style={styles.title}>Реєстрація</Text>
+              <TextInput
+                style={{
+                  ...styles.input,
+                  borderColor: login ? "#FF6C00" : "#E8E8E8",
+                }}
+                placeholder="Логін"
+                onFocus={() => {
+                  setIsShowKeyBoarding(true);
+                  setAddress(false);
+                  setLogin(true);
+                  setPassword(false);
+                }}></TextInput>
+              <TextInput
+                style={{
+                  ...styles.input,
+                  borderColor: address ? "#FF6C00" : "#E8E8E8",
+                }}
+                placeholder="Адреса електронної пошти"
+                onFocus={() => {
+                  setIsShowKeyBoarding(true);
+                  setAddress(true);
+                  setLogin(false);
+                  setPassword(false);
+                }}></TextInput>
+              <TextInput
+                style={{
+                  ...styles.input,
+                  borderColor: password ? "#FF6C00" : "#E8E8E8",
+                }}
+                placeholder="Пароль"
+                secureTextEntry={true}
+                onFocus={() => {
+                  setIsShowKeyBoarding(true);
+                  setAddress(false);
+                  setLogin(false);
+                  setPassword(true);
+                }}></TextInput>
+            </KeyboardAvoidingView>
+
+            <View>
+              <TouchableOpacity
+                style={styles.registerBtn}
+                onPress={keyBoardHide}>
+                <Text style={styles.registerBtnTitle}>Зареєструватися</Text>
+              </TouchableOpacity>
+              <Text
+                style={{
+                  ...styles.anchor,
+                  ...Platform.select({
+                    android: { marginBottom: isShowKeyBoarding ? 20 : 144 },
+                  }),
+                }}>
+                Вже є аккаунт? Увійти
+              </Text>
             </View>
           </View>
-          <Text style={styles.title}>Реєстрація</Text>
-          <TextInput style={styles.input} placeholder="Логін"></TextInput>
-          <TextInput
-            style={styles.input}
-            placeholder="Адреса електронної пошти"></TextInput>
-          <TextInput
-            style={styles.input}
-            placeholder="Пароль"
-            secureTextEntry={true}></TextInput>
-          <TouchableOpacity style={styles.registerBtn}>
-            <Text style={styles.registerBtnTitle}>Зареєструватися</Text>
-          </TouchableOpacity>
-          <Text style={styles.anchor}>Вже є аккаунт? Увійти</Text>
-        </View>
-      </ImageBackground>
-    </View>
+        </ImageBackground>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-  backgroundPhoto: {
-    flex: 1,
-    justifyContent: "center",
-  },
-  firstContainer: {
-    flex: 1,
-  },
-  innerContainer: {
-    flex: 2,
-    backgroundColor: "#fff",
-    borderTopLeftRadius: 25,
-    borderTopRightRadius: 25,
-  },
-  photoUser: {
-    backgroundColor: "#F6F6F6",
-    height: 120,
-    width: 120,
-    borderRadius: 16,
-    top: -60,
-    left: 128,
-    elevation: 10,
-    alignItems: "flex-end",
-    justifyContent: "flex-end",
-    position: "absolute",
-  },
-  addPhoto: {
-    borderWidth: 1,
-    borderColor: "#FF6C00",
-    backgroundColor: "#fff",
-    borderRadius: 50,
-    height: 25,
-    width: 25,
-    top: -14,
-    left: 12,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  plus: {
-    width: 13,
-    height: 13,
-  },
-  title: {
-    fontSize: 30,
-    fontWeight: 500,
-    marginBottom: 16,
-    marginHorizontal: 100,
-    alignItems: "center",
-    marginTop: 90,
-  },
-  input: {
-    backgroundColor: "#F6F6F6",
-    marginTop: 16,
-    marginHorizontal: 16,
-    height: 50,
-    borderWidth: 1,
-    borderColor: "#E8E8E8",
-    borderRadius: 8,
-    paddingLeft: 16,
-  },
-  registerBtn: {
-    backgroundColor: "#FF6C00",
-    marginHorizontal: 16,
-    borderRadius: 100,
-    marginTop: 43,
-    paddingVertical: 16,
-    alignItems: "center",
-  },
-  registerBtnTitle: {
-    color: "#fff",
-    fontSize: 16,
-  },
-  anchor: {
-    color: "#1B4371",
-    fontSize: 16,
-    marginTop: 16,
-    marginHorizontal: 94,
-  },
-});
 
 export default RegistrationScreen;
