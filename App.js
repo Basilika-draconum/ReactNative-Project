@@ -1,16 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import "react-native-gesture-handler";
+import { NavigationContainer } from "@react-navigation/native";
+
 import { useFonts } from "expo-font";
 
-import RegistrationScreen from "./Screens/RegistrationScreen/RegistrationScreen";
-import LoginScreen from "./Screens/LoginScreen/LoginScreen";
-
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-
-const Stack = createStackNavigator();
+import { useRoute } from "./router";
 
 export default function App() {
+  const [isAuth, setIsAuth] = useState(null);
+  const routing = useRoute(isAuth);
   const [fontsLoaded] = useFonts({
     "Roboto-Bold": require("./assets/fonts/Roboto-Bold.ttf"),
     "Roboto-Regular": require("./assets/fonts/Roboto-Regular.ttf"),
@@ -19,13 +17,5 @@ export default function App() {
   if (!fontsLoaded) {
     return null;
   }
-
-  return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Registration" component={RegistrationScreen} />
-        <Stack.Screen name="Login" component={LoginScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+  return <NavigationContainer>{routing}</NavigationContainer>;
 }
