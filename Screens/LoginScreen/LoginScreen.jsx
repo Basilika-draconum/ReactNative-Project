@@ -13,6 +13,7 @@ import {
 
 import photoBg from "../../assets/images/photoBG.jpeg";
 import { styles } from "./loginScreenStyles";
+import { useNavigation } from "@react-navigation/native";
 
 const initialStateLogin = {
   email: "",
@@ -24,6 +25,8 @@ const LoginScreen = () => {
   const [address, setAddress] = useState(false);
   const [password, setPassword] = useState(false);
   const [state, setState] = useState(initialStateLogin);
+
+  const navigation = useNavigation();
 
   const keyBoardHide = () => {
     setIsShowKeyBoarding(false);
@@ -91,7 +94,13 @@ const LoginScreen = () => {
             <TouchableOpacity style={styles.registerBtn} onPress={handleSubmit}>
               <Text style={styles.registerBtnTitle}>Увійти</Text>
             </TouchableOpacity>
-            <Text style={styles.anchor}>Немає аккаунта? Зареєструватися</Text>
+            <TouchableOpacity
+              activeOpacity={0.6}
+              onPress={() => {
+                navigation.navigate("Registration");
+              }}>
+              <Text style={styles.anchor}>Немає аккаунта? Зареєструватися</Text>
+            </TouchableOpacity>
           </View>
         </ImageBackground>
       </View>

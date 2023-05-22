@@ -14,6 +14,7 @@ import {
 import photoBg from "../../assets/images/photoBG.jpeg";
 import plus from "../../assets/plus.png";
 import { styles } from "./registrationScreenStyles";
+import { useNavigation } from "@react-navigation/native";
 
 const initialStateForm = {
   login: "",
@@ -27,6 +28,8 @@ const RegistrationScreen = () => {
   const [address, setAddress] = useState(false);
   const [password, setPassword] = useState(false);
   const [state, setState] = useState(initialStateForm);
+
+  const navigation = useNavigation();
 
   const keyBoardHide = () => {
     setIsShowKeyBoarding(false);
@@ -122,7 +125,13 @@ const RegistrationScreen = () => {
                 onPress={handleSubmit}>
                 <Text style={styles.registerBtnTitle}>Зареєструватися</Text>
               </TouchableOpacity>
-              <Text style={styles.anchor}>Вже є аккаунт? Увійти</Text>
+              <TouchableOpacity
+                activeOpacity={0.6}
+                onPress={() => {
+                  navigation.navigate("Login");
+                }}>
+                <Text style={styles.anchor}>Вже є аккаунт? Увійти</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </ImageBackground>
