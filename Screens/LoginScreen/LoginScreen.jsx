@@ -35,18 +35,11 @@ const LoginScreen = () => {
     Keyboard.dismiss();
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     keyBoardHide();
     console.log(state);
-    try {
-      await new Promise((resolve) => {
-        setTimeout(() => {
-          resolve("John Doe");
-        }, 1000);
-      });
-      navigation.navigate("Home");
-      setState(initialStateLogin);
-    } catch {}
+    setState(initialStateLogin);
+    navigation.navigate("Home");
   };
 
   return (

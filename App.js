@@ -7,8 +7,8 @@ import { useFonts } from "expo-font";
 import { useRoute } from "./router";
 
 export default function App() {
-  const [isAuth, setIsAuth] = useState(null);
-  const routing = useRoute(isAuth);
+  // const [isAuth, setIsAuth] = useState(null);
+  const routing = useRoute();
   const [fontsLoaded] = useFonts({
     "Roboto-Bold": require("./assets/fonts/Roboto-Bold.ttf"),
     "Roboto-Regular": require("./assets/fonts/Roboto-Regular.ttf"),

@@ -1,8 +1,10 @@
 import React from "react";
+import { View, Text } from "react-native";
+import { styles } from "./createPostsScreenStyles";
 
 const CreatePostsScreen = () => {
   return (
-    <View>
+    <View style={styles.container}>
       <Text>CreatePostsScreen</Text>
     </View>
   );

@@ -1,10 +1,11 @@
 import React from "react";
 import { Text, View } from "react-native";
+import { styles } from "./postsScreenStyles";
 
 const PostsScreen = () => {
   return (
-    <View>
-      <Text>PostsScreen</Text>
+    <View style={styles.container}>
+      <Text style={styles.user}>Natali Romanova</Text>
     </View>
   );
 };

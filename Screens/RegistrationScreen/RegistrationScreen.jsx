@@ -43,6 +43,7 @@ const RegistrationScreen = () => {
     keyBoardHide();
     console.log(state);
     setState(initialStateForm);
+    navigation.navigate("Home");
   };
 
   return (
