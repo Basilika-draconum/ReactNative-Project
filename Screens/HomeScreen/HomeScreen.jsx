@@ -12,6 +12,9 @@ import { TouchableOpacity } from "react-native";
 const MainTable = createBottomTabNavigator();
 
 const HomeScreen = ({ navigation }) => {
+  const handleExit = () => {
+    navigation.navigate("Login");
+  };
   return (
     <MainTable.Navigator
       initialRouteName="Posts"
@@ -25,8 +28,12 @@ const HomeScreen = ({ navigation }) => {
             <SimpleLineIcons name="grid" size={24} color="#212121CC" />
           ),
           headerRight: () => (
-            <TouchableOpacity style={{ paddingRight: 10 }}>
-              <Ionicons name="exit-outline" size={24} color="#212121CC" />
+            <TouchableOpacity style={{ paddingRight: 10 }} onPress={handleExit}>
+              <Ionicons
+                name="exit-outline"
+                size={24}
+                color="rgba(189, 189, 189, 1)"
+              />
             </TouchableOpacity>
           ),
         }}
@@ -44,8 +51,12 @@ const HomeScreen = ({ navigation }) => {
           },
           tabBarIcon: () => <Feather name="plus" size={26} color="#fff" />,
           headerRight: () => (
-            <TouchableOpacity style={{ paddingRight: 10 }}>
-              <Ionicons name="exit-outline" size={24} color="#212121CC" />
+            <TouchableOpacity style={{ paddingRight: 10 }} onPress={handleExit}>
+              <Ionicons
+                name="exit-outline"
+                size={24}
+                color="rgba(189, 189, 189, 1)"
+              />
             </TouchableOpacity>
           ),
         }}
