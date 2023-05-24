@@ -32,9 +32,13 @@ export const styles = StyleSheet.create({
     alignSelf: "center",
     backgroundColor: "#F6F6F6",
     paddingVertical: 16,
-    paddingHorizontal: 118,
+
     borderRadius: 100,
     marginTop: 16,
+    ...Platform.select({
+      ios: { paddingHorizontal: 118 },
+      android: { paddingHorizontal: 100 },
+    }),
   },
   txtShare: {
     fontFamily: "Roboto-Medium",

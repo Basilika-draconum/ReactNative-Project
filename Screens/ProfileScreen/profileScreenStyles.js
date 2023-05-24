@@ -56,11 +56,47 @@ export const styles = StyleSheet.create({
     fontFamily: "Roboto-Medium",
     fontWeight: 500,
     marginBottom: 16,
-    marginHorizontal: 54,
     alignItems: "center",
+    alignSelf: "center",
     marginTop: 42,
   },
+  picture: { alignSelf: "center" },
+  description: {
+    fontFamily: "Roboto-Medium",
+    fontSize: 16,
+    marginTop: 8,
+  },
   reaction: {
-    // flexDirection: "row-reverse",
+    flexDirection: "row",
+    marginTop: 8,
+    justifyContent: "space-between",
+  },
+  reacts: {
+    flexDirection: "row",
+  },
+  number: {
+    marginLeft: 6,
+    fontFamily: "Roboto-Regular",
+    fontSize: 16,
+  },
+  locationName: {
+    marginLeft: 4,
+    fontFamily: "Roboto-Regular",
+    fontSize: 16,
+    textDecorationLine: "underline",
+    textDecorationColor: "rgba(189, 189, 189, 1)",
+  },
+  comments: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginRight: 24,
+  },
+  likes: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  location: {
+    flexDirection: "row",
+    alignItems: "center",
   },
 });

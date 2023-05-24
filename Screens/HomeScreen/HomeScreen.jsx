@@ -7,7 +7,7 @@ import { SimpleLineIcons } from "@expo/vector-icons";
 import PostsScreen from "../PostsScreen/PostsScreen";
 import CreatePostsScreen from "../CreatePostsScreen/CreatePostsScreen";
 import ProfileScreen from "../ProfileScreen/ProfileScreen";
-import { TouchableOpacity } from "react-native";
+import { Platform, TouchableOpacity } from "react-native";
 
 const MainTable = createBottomTabNavigator();
 
@@ -47,7 +47,10 @@ const HomeScreen = ({ navigation }) => {
             backgroundColor: "#FF6C00",
             borderRadius: 20,
             marginHorizontal: 10,
-            marginTop: 9,
+            ...Platform.select({
+              ios: { marginTop: 9 },
+              android: { marginTop: 4, marginBottom: 4 },
+            }),
           },
           tabBarIcon: () => <Feather name="plus" size={26} color="#fff" />,
           headerRight: () => (
