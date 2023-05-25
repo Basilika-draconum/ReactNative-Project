@@ -27,7 +27,7 @@ const ProfileScreen = ({ navigation }) => {
         <View style={styles.innerContainer}>
           <View style={styles.photoUser}>
             <View style={styles.addPhoto}>
-              <Image source={cross} style={styles.plus}></Image>
+              <Image source={cross} style={styles.plus} />
             </View>
           </View>
           <TouchableOpacity
@@ -43,10 +43,7 @@ const ProfileScreen = ({ navigation }) => {
           </TouchableOpacity>
           <Text style={styles.title}>Anzhelika Dubinenko</Text>
           <View>
-            <Image
-              source={forest}
-              resizeMode="cover"
-              style={styles.picture}></Image>
+            <Image source={forest} resizeMode="cover" style={styles.picture} />
             <Text style={styles.description}>Лісок</Text>
             <View style={styles.reaction}>
               <View style={styles.reacts}>

@@ -9,8 +9,24 @@ export const styles = StyleSheet.create({
   },
   picture: {
     height: 240,
-    backgroundColor: "red",
+    backgroundColor: "rgba(246, 246, 246, 1)",
+    borderWidth: 1,
     borderRadius: 8,
+  },
+  pictureView: {
+    height: 238,
+    borderWidth: 1,
+    borderRadius: 8,
+  },
+  btnPicture: {
+    backgroundColor: "rgba(255, 255, 255, 0.3)",
+    borderColor: "rgba(255, 255, 255, 0.3)",
+    borderWidth: 2,
+    borderRadius: 100,
+    padding: 18,
+    alignItems: "center",
+    alignSelf: "center",
+    marginTop: 90,
   },
   underPicture: {
     color: "rgba(189, 189, 189, 1)",
@@ -30,7 +46,19 @@ export const styles = StyleSheet.create({
   },
   btnShare: {
     alignSelf: "center",
-    backgroundColor: "#F6F6F6",
+    backgroundColor: "rgba(246, 246, 246, 1)",
+    paddingVertical: 16,
+
+    borderRadius: 100,
+    marginTop: 16,
+    ...Platform.select({
+      ios: { paddingHorizontal: 118 },
+      android: { paddingHorizontal: 100 },
+    }),
+  },
+  btnShareFocus: {
+    alignSelf: "center",
+    backgroundColor: "rgba(255, 108, 0, 1) ",
     paddingVertical: 16,
 
     borderRadius: 100,
@@ -45,4 +73,5 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     color: "rgba(189, 189, 189, 1)",
   },
+  txtShareFocus: { fontFamily: "Roboto-Medium", fontSize: 16, color: "white" },
 });
