@@ -1,25 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import MapView, { Marker } from "react-native-maps";
 import { StyleSheet, View } from "react-native";
+import { useRoute } from "@react-navigation/native";
 
 const MapScreen = () => {
+  const route = useRoute();
+  console.log(route);
+  const initialRegion = {
+    latitude: route.params?.location?.latitude || 50.50853,
+    longitude: route.params?.location?.longitude || 30.50074,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  };
   return (
     <View style={styles.container}>
       <MapView
         style={styles.map}
-        initialRegion={{
-          latitude: 49.254671640684485,
-          longitude: 26.255464492277728,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}>
-        <Marker
-          coordinate={{
-            latitude: 49.254671640684485,
-            longitude: 26.255464492277728,
-          }}
-          title="Here"
-        />
+        initialRegion={initialRegion}
+        showsUserLocation={true}>
+        {initialRegion.latitude && initialRegion.longitude && (
+          <Marker
+            coordinate={{
+              latitude: initialRegion.latitude,
+              longitude: initialRegion.longitude,
+            }}
+            title="Travel photo"
+          />
+        )}
       </MapView>
     </View>
   );

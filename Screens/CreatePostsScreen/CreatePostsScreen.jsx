@@ -48,16 +48,36 @@ const CreatePostsScreen = ({ navigation }) => {
     setTitle(null);
   };
 
-  const takePicture = async () => {
-    const photo = await cameraRef.takePictureAsync();
-    setPicture(photo.uri);
-
+  const getLocation = async () => {
     const location = await Location.getCurrentPositionAsync();
-    const coords = {
+    return {
       latitude: location.coords.latitude,
       longitude: location.coords.longitude,
     };
-    setLocation(coords);
+  };
+
+  const takePicture = async () => {
+    if (cameraRef) {
+      const { uri } = await cameraRef.takePictureAsync();
+      setPicture(uri);
+      console.log(uri);
+      try {
+        await MediaLibrary.createAssetAsync(uri);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    try {
+      setLocation(await getLocation());
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleLocationIconPress = async () => {
+    const location = await getLocation();
+    navigation.navigate("Map", { location });
   };
 
   return (
@@ -93,19 +113,15 @@ const CreatePostsScreen = ({ navigation }) => {
         style={styles.input}
         value={title}
         onChangeText={setTitle}></TextInput>
-      <TouchableOpacity onPress={() => navigation.navigate("Map")}>
-        <TextInput
-          placeholder="Локація..."
-          style={styles.input}
-          value={location}
-          onChangeText={setLocation}>
-          <Entypo
-            name="location-pin"
-            size={24}
-            color="rgba(189, 189, 189, 1)"
-          />
-        </TextInput>
-      </TouchableOpacity>
+      <TextInput
+        placeholder="Локація..."
+        style={styles.inputLoc}
+        value={JSON.stringify(location || "")}
+        onChangeText={setLocation}></TextInput>
+      <Text style={styles.iconLoc} onPress={handleLocationIconPress}>
+        <Entypo name="location-pin" size={24} color="rgba(189, 189, 189, 1)" />
+      </Text>
+
       {title && location && picture ? (
         <TouchableOpacity style={styles.btnShareFocus} onPress={handleSubmit}>
           <Text style={styles.txtShareFocus}>Опублікувати</Text>

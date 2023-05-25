@@ -44,6 +44,21 @@ export const styles = StyleSheet.create({
     borderBottomColor: "rgba(189, 189, 189, 1)",
     borderBottomWidth: 1,
   },
+  inputLoc: {
+    paddingLeft: 28,
+    fontFamily: "Roboto-Medium",
+    fontSize: 16,
+    paddingVertical: 16,
+    marginTop: 16,
+    marginBottom: 16,
+    borderBottomColor: "rgba(189, 189, 189, 1)",
+    borderBottomWidth: 1,
+  },
+  iconLoc: {
+    position: "relative",
+    top: -55,
+    width: 30,
+  },
   btnShare: {
     alignSelf: "center",
     backgroundColor: "rgba(246, 246, 246, 1)",

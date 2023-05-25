@@ -9,14 +9,18 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 // import forest from "../../assets/images/forest.png";
 
 const DefaultPostsScreen = ({ route, navigation }) => {
+  console.log(route);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     if (route.params) {
       setPosts((prevState) => [
         ...prevState,
-        route.params.picture,
-        route.params.title,
+        {
+          picture: route.params.picture,
+          title: route.params.title,
+          location: route.params.location,
+        },
       ]);
     }
   }, [route.params]);
@@ -57,7 +61,9 @@ const DefaultPostsScreen = ({ route, navigation }) => {
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.location}
-                onPress={() => navigation.navigate("Map")}>
+                onPress={() =>
+                  navigation.navigate("Map", { location: item.location })
+                }>
                 <Entypo
                   name="location-pin"
                   size={24}
