@@ -1,9 +1,7 @@
 import React from "react";
 import "react-native-gesture-handler";
-import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
 import { useFonts } from "expo-font";
-import { onAuthStateChanged } from "firebase/auth";
 
 import { store } from "./redux/store";
 import { auth } from "./firebase/config";

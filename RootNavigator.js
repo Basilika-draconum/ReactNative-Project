@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import { onAuthStateChanged } from "firebase/auth";
@@ -8,13 +8,18 @@ import {
   createNavigationContainerRef,
   CommonActions,
 } from "@react-navigation/native";
+import { useSelector, useDispatch } from "react-redux";
 
 import { LoginNavigator } from "./LoginNavigator";
 import { HomeNavigator } from "./HomeNavigator";
+import { authStateChangeUserThunk } from "./redux/auth/authOparations";
+
 const Stack = createStackNavigator();
 const navigationRef = createNavigationContainerRef();
 
 export default function RootNavigator() {
+  const dispatch = useDispatch();
+
   const resetNavigation = useCallback((name) => {
     const resetAction = CommonActions.reset({
       index: 0,
@@ -31,8 +36,10 @@ export default function RootNavigator() {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         resetNavigation("HomeNavigator");
+        dispatch(authStateChangeUserThunk());
         return;
       }
+
       resetNavigation("LoginNavigator");
     });
 

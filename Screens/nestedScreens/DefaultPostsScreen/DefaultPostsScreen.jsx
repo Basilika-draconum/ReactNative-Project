@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Text, Image, View, FlatList } from "react-native";
+import { useSelector } from "react-redux";
 
 import { FontAwesome } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
@@ -10,6 +11,8 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 const DefaultPostsScreen = ({ route, navigation }) => {
   const [posts, setPosts] = useState([]);
+
+  const user = useSelector(({ auth }) => auth);
 
   useEffect(() => {
     if (route.params) {
@@ -32,8 +35,8 @@ const DefaultPostsScreen = ({ route, navigation }) => {
           source={require("../../../assets/images/skrat.jpeg")}
         />
         <View>
-          <Text style={styles.user}>Anzhelika Dubinenko</Text>
-          <Text style={styles.email}>email@example.com</Text>
+          <Text style={styles.user}>{user.login || "John Doe"}</Text>
+          <Text style={styles.email}>{user.email || "email@example.com"}</Text>
         </View>
       </View>
       <FlatList

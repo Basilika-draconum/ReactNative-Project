@@ -41,7 +41,6 @@ const LoginScreen = () => {
   const handleSubmit = () => {
     keyBoardHide();
     dispatch(loginThunk(state));
-    setState(initialStateLogin);
   };
 
   return (

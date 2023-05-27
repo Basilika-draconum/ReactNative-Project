@@ -6,6 +6,8 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
+import { useDispatch } from "react-redux";
+
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
@@ -16,8 +18,11 @@ import photoBg from "../../assets/images/photoBG.jpeg";
 import forest from "../../assets/images/forest.png";
 
 import cross from "../../assets/cross.png";
+import { logoutThunk } from "../../redux/auth/authOparations";
 
 const ProfileScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -33,7 +38,7 @@ const ProfileScreen = ({ navigation }) => {
           <TouchableOpacity
             style={styles.exit}
             onPress={() => {
-              navigation.navigate("Login");
+              dispatch(logoutThunk());
             }}>
             <Ionicons
               name="exit-outline"
