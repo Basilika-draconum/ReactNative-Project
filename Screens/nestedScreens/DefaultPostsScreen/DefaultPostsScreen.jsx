@@ -9,7 +9,6 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 // import forest from "../../assets/images/forest.png";
 
 const DefaultPostsScreen = ({ route, navigation }) => {
-  console.log(route);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {

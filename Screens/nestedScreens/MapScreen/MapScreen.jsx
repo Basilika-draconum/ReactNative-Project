@@ -5,7 +5,6 @@ import { useRoute } from "@react-navigation/native";
 
 const MapScreen = () => {
   const route = useRoute();
-  console.log(route);
   const initialRegion = {
     latitude: route.params?.location?.latitude || 50.50853,
     longitude: route.params?.location?.longitude || 30.50074,

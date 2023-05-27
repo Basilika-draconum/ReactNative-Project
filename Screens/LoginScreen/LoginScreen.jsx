@@ -10,10 +10,12 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
 
+import { loginThunk } from "../../redux/auth/authOparations.js";
 import photoBg from "../../assets/images/photoBG.jpeg";
 import { styles } from "./loginScreenStyles";
-import { useNavigation } from "@react-navigation/native";
 
 const initialStateLogin = {
   email: "",
@@ -27,6 +29,7 @@ const LoginScreen = () => {
   const [state, setState] = useState(initialStateLogin);
 
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const keyBoardHide = () => {
     setIsShowKeyBoarding(false);
@@ -37,9 +40,8 @@ const LoginScreen = () => {
 
   const handleSubmit = () => {
     keyBoardHide();
-    console.log(state);
+    dispatch(loginThunk(state));
     setState(initialStateLogin);
-    navigation.navigate("Home");
   };
 
   return (

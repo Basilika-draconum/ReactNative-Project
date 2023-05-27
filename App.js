@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
-
+import { Provider } from "react-redux";
 import { useFonts } from "expo-font";
+import { onAuthStateChanged } from "firebase/auth";
 
-import { useRoute } from "./router";
+import { store } from "./redux/store";
+import { auth } from "./firebase/config";
+import RootNavigator from "./RootNavigator";
 
 export default function App() {
-  // const [isAuth, setIsAuth] = useState(null);
-  const routing = useRoute();
+  // const routing = useRoute(user);
   const [fontsLoaded] = useFonts({
     "Roboto-Bold": require("./assets/fonts/Roboto-Bold.ttf"),
     "Roboto-Regular": require("./assets/fonts/Roboto-Regular.ttf"),
@@ -17,5 +19,9 @@ export default function App() {
   if (!fontsLoaded) {
     return null;
   }
-  return <NavigationContainer>{routing}</NavigationContainer>;
+  return (
+    <Provider store={store}>
+      <RootNavigator />
+    </Provider>
+  );
 }

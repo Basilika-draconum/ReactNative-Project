@@ -11,10 +11,13 @@ import {
   Platform,
   TouchableWithoutFeedback,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import { registerThunk } from "../../redux/auth/authOparations";
+
 import photoBg from "../../assets/images/photoBG.jpeg";
 import plus from "../../assets/plus.png";
 import { styles } from "./registrationScreenStyles";
-import { useNavigation } from "@react-navigation/native";
 
 const initialStateForm = {
   login: "",
@@ -30,6 +33,7 @@ const RegistrationScreen = () => {
   const [state, setState] = useState(initialStateForm);
 
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const keyBoardHide = () => {
     setIsShowKeyBoarding(false);
@@ -41,9 +45,8 @@ const RegistrationScreen = () => {
 
   const handleSubmit = () => {
     keyBoardHide();
-    console.log(state);
+    dispatch(registerThunk(state));
     setState(initialStateForm);
-    navigation.navigate("Home");
   };
 
   return (

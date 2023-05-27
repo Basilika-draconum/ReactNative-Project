@@ -2,22 +2,24 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useNavigation } from "@react-navigation/native";
 import { Platform, TouchableOpacity } from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
+
+const MainTable = createBottomTabNavigator();
+//Screens
+import PostsScreen from "./Screens/PostsScreen/PostsScreen";
+import CreatePostsScreen from "./Screens/CreatePostsScreen/CreatePostsScreen";
+import ProfileScreen from "./Screens/ProfileScreen/ProfileScreen";
 //Icons
 import { Ionicons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { SimpleLineIcons } from "@expo/vector-icons";
-//Screens
-import PostsScreen from "../PostsScreen/PostsScreen";
-import CreatePostsScreen from "../CreatePostsScreen/CreatePostsScreen";
-import ProfileScreen from "../ProfileScreen/ProfileScreen";
+import { useDispatch } from "react-redux";
+import { logoutThunk } from "./redux/auth/authOparations";
 
-const MainTable = createBottomTabNavigator();
-
-const HomeScreen = () => {
+export const HomeNavigator = () => {
   const navigation = useNavigation();
-  const handleExit = () => {
-    navigation.navigate("Login");
-  };
+  const dispatch = useDispatch();
+
   return (
     <MainTable.Navigator
       initialRouteName="Posts"
@@ -33,7 +35,9 @@ const HomeScreen = () => {
           headerRight: () => (
             <TouchableOpacity
               style={{ paddingRight: 10 }}
-              onPress={() => navigation.navigate("Login")}>
+              onPress={() => {
+                dispatch(logoutThunk());
+              }}>
               <Ionicons
                 name="exit-outline"
                 size={24}
@@ -59,7 +63,11 @@ const HomeScreen = () => {
           },
           tabBarIcon: () => <Feather name="plus" size={26} color="#fff" />,
           headerRight: () => (
-            <TouchableOpacity style={{ paddingRight: 10 }} onPress={handleExit}>
+            <TouchableOpacity
+              style={{ paddingRight: 10 }}
+              onPress={() => {
+                dispatch(logoutThunk());
+              }}>
               <Ionicons
                 name="exit-outline"
                 size={24}
@@ -82,5 +90,3 @@ const HomeScreen = () => {
     </MainTable.Navigator>
   );
 };
-
-export default HomeScreen;
