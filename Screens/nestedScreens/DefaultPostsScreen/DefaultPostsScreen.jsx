@@ -1,31 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { Text, Image, View, FlatList } from "react-native";
 import { useSelector } from "react-redux";
+import { db } from "../../../firebase/config";
+import { collection, query, onSnapshot } from "firebase/firestore";
 
 import { FontAwesome } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 
 import { styles } from "./defaultPostsScreenStyles";
 import { TouchableOpacity } from "react-native-gesture-handler";
-// import forest from "../../assets/images/forest.png";
 
 const DefaultPostsScreen = ({ route, navigation }) => {
   const [posts, setPosts] = useState([]);
 
   const user = useSelector(({ auth }) => auth);
 
+  const getAllPosts = async () => {
+    const q = query(collection(db, "posts"));
+    await onSnapshot(q, (data) =>
+      setPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+    );
+  };
+
   useEffect(() => {
-    if (route.params) {
-      setPosts((prevState) => [
-        ...prevState,
-        {
-          picture: route.params.picture,
-          title: route.params.title,
-          location: route.params.location,
-        },
-      ]);
-    }
-  }, [route.params]);
+    getAllPosts();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -53,13 +52,15 @@ const DefaultPostsScreen = ({ route, navigation }) => {
             <View style={styles.reaction}>
               <TouchableOpacity
                 style={styles.comments}
-                onPress={() => navigation.navigate("Comments")}>
+                onPress={() =>
+                  navigation.navigate("Comments", { postId: item.id })
+                }>
                 <FontAwesome
                   name="comment"
                   size={24}
                   color="rgba(189, 189, 189, 1)"
                 />
-                <Text style={styles.number}>8</Text>
+                <Text style={styles.number}>Comments</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.location}

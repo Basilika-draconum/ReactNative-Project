@@ -7,13 +7,15 @@ import {
   ImageBackground,
 } from "react-native";
 import { useSelector } from "react-redux";
-
+//icons
 import { Entypo } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { styles } from "./createPostsScreenStyles";
+//native component
 import { Camera } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
 import * as Location from "expo-location";
+//firebase
 import { db, storage } from "../../firebase/config";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { collection, addDoc } from "firebase/firestore";
@@ -50,7 +52,7 @@ const CreatePostsScreen = ({ navigation }) => {
 
   const handleSubmit = () => {
     uploadPostToServer();
-    navigation.navigate("DefaultScreen", { picture, title, location });
+    navigation.navigate("DefaultScreen");
     setLocation(null);
     setPicture("");
     setTitle(null);
