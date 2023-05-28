@@ -37,8 +37,8 @@ export const styles = StyleSheet.create({
     borderRadius: 50,
     height: 25,
     width: 25,
-    top: -14,
-    left: 12,
+    top: 24,
+    left: 235,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -48,8 +48,8 @@ export const styles = StyleSheet.create({
   },
   exit: {
     alignSelf: "flex-end",
-    marginTop: 22,
-    marginRight: 16,
+    marginTop: 2,
+    marginRight: 6,
   },
   title: {
     fontSize: 30,
@@ -60,7 +60,12 @@ export const styles = StyleSheet.create({
     alignSelf: "center",
     marginTop: 42,
   },
-  picture: { alignSelf: "center" },
+  picture: {
+    alignSelf: "center",
+    width: "100%",
+    height: 240,
+    borderRadius: 10,
+  },
   description: {
     fontFamily: "Roboto-Medium",
     fontSize: 16,
@@ -99,4 +104,5 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
+  item: { paddingBottom: 40 },
 });
