@@ -8,7 +8,7 @@ import {
   createNavigationContainerRef,
   CommonActions,
 } from "@react-navigation/native";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { LoginNavigator } from "./LoginNavigator";
 import { HomeNavigator } from "./HomeNavigator";

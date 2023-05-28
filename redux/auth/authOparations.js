@@ -4,7 +4,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { app, auth } from "../../firebase/config";
+import { auth } from "../../firebase/config";
 import { authSlice } from "./authReducer";
 
 export const authLoginUser = () => async (dispatch, getState) => {};
@@ -54,19 +54,22 @@ export const registerThunk = createAsyncThunk(
   }
 );
 
-export const logoutThunk = createAsyncThunk("auth/logout", async () => {
-  try {
-    await signOut(auth);
-    thunkAPI.dispatch(authSlice.actions.authSignOut());
-  } catch (error) {
-    console.log("error", error);
-    thunkAPI.rejectWithValue(error.message);
+export const logoutThunk = createAsyncThunk(
+  "auth/logout",
+  async (_, thunkAPI) => {
+    try {
+      await signOut(auth);
+      thunkAPI.dispatch(authSlice.actions.authSignOut());
+    } catch (error) {
+      console.log("error", error);
+      thunkAPI.rejectWithValue(error.message);
+    }
   }
-});
+);
 
 export const authStateChangeUserThunk = createAsyncThunk(
   "auth/change",
-  async () => {
+  async (_, thunkAPI) => {
     try {
       await onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -84,7 +87,6 @@ export const authStateChangeUserThunk = createAsyncThunk(
         }
       });
     } catch {
-      console.log("error", error);
       thunkAPI.rejectWithValue(error.message);
     }
   }

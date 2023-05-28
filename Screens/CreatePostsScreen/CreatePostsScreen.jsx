@@ -6,12 +6,17 @@ import {
   TouchableOpacity,
   ImageBackground,
 } from "react-native";
+import { useSelector } from "react-redux";
+
 import { Entypo } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { styles } from "./createPostsScreenStyles";
 import { Camera } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
 import * as Location from "expo-location";
+import { db, storage } from "../../firebase/config";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { collection, addDoc } from "firebase/firestore";
 
 const CreatePostsScreen = ({ navigation }) => {
   const [title, setTitle] = useState(null);
@@ -19,6 +24,8 @@ const CreatePostsScreen = ({ navigation }) => {
   const [hasPermission, setHasPermission] = useState(null);
   const [cameraRef, setCameraRef] = useState(null);
   const [picture, setPicture] = useState("");
+
+  const { userId } = useSelector((state) => state.auth);
 
   useEffect(() => {
     (async () => {
@@ -42,6 +49,7 @@ const CreatePostsScreen = ({ navigation }) => {
   }
 
   const handleSubmit = () => {
+    uploadPostToServer();
     navigation.navigate("DefaultScreen", { picture, title, location });
     setLocation(null);
     setPicture("");
@@ -54,6 +62,20 @@ const CreatePostsScreen = ({ navigation }) => {
       latitude: location.coords.latitude,
       longitude: location.coords.longitude,
     };
+  };
+  const uploadPhotoToServer = async () => {
+    try {
+      const response = await fetch(picture);
+      const file = await response.blob();
+      const uniquePictureId = Date.now().toString();
+
+      const storageRef = await ref(storage, `postPicture/${uniquePictureId}`);
+      await uploadBytes(storageRef, file);
+      const processedPhoto = await getDownloadURL(storageRef);
+      return processedPhoto;
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const takePicture = async () => {
@@ -77,6 +99,22 @@ const CreatePostsScreen = ({ navigation }) => {
   const handleLocationIconPress = async () => {
     const location = await getLocation();
     navigation.navigate("Map", { location });
+  };
+
+  const uploadPostToServer = async () => {
+    try {
+      const picture = await uploadPhotoToServer();
+
+      const docRef = await addDoc(collection(db, "posts"), {
+        picture,
+        title,
+        location,
+        userId,
+      });
+      console.log("Document written with ID: ", docRef.id);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
