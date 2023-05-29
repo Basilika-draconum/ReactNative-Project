@@ -2,9 +2,7 @@ import React from "react";
 import "react-native-gesture-handler";
 import { Provider } from "react-redux";
 import { useFonts } from "expo-font";
-
 import { store } from "./redux/store";
-import { auth } from "./firebase/config";
 import RootNavigator from "./RootNavigator";
 
 export default function App() {

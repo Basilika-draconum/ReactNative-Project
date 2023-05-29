@@ -7,8 +7,6 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { auth } from "../../firebase/config";
 import { authSlice } from "./authReducer";
 
-export const authLoginUser = () => async (dispatch, getState) => {};
-
 export const loginThunk = createAsyncThunk(
   "auth/login",
   async ({ email, password }, thunkAPI) => {
@@ -43,12 +41,8 @@ export const registerThunk = createAsyncThunk(
         login: displayName,
         userId: uid,
       };
-      console.log("userUpdateProfile", userUpdateProfile);
       thunkAPI.dispatch(authSlice.actions.updateUserProfile(userUpdateProfile));
-
-      console.log("user", user);
     } catch (error) {
-      console.log("error", error);
       thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -77,7 +71,6 @@ export const authStateChangeUserThunk = createAsyncThunk(
             login: displayName,
             userId: uid,
           };
-
           thunkAPI.dispatch(
             authSlice.actions.updateUserProfile(userUpdateProfile)
           );

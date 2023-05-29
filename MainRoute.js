@@ -3,9 +3,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useNavigation } from "@react-navigation/native";
 import { Platform, TouchableOpacity } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
-
-const Stack = createStackNavigator();
-const MainTable = createBottomTabNavigator();
 //Screens
 import PostsScreen from "./Screens/PostsScreen/PostsScreen";
 import CreatePostsScreen from "./Screens/CreatePostsScreen/CreatePostsScreen";
@@ -16,6 +13,9 @@ import LoginScreen from "./Screens/LoginScreen/LoginScreen";
 import { Ionicons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { SimpleLineIcons } from "@expo/vector-icons";
+
+const Stack = createStackNavigator();
+const MainTable = createBottomTabNavigator();
 
 export const MainRoute = ({ isAuth }) => {
   const navigation = useNavigation();

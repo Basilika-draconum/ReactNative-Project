@@ -97,9 +97,7 @@ const CommentsScreen = ({ route }) => {
                   ios: {
                     marginBottom: isShowKeyboard ? 230 : 0,
                   },
-                  android: {
-                    marginBottom: isShowKeyboard ? 40 : 0,
-                  },
+                  android: {},
                 }),
               }}
               placeholder="Коментувати..."
@@ -112,10 +110,9 @@ const CommentsScreen = ({ route }) => {
                 ...Platform.select({
                   ios: {
                     top: isShowKeyboard ? -273 : -44,
-                    // right: isShowKeyboard ? 8 : 8,
                   },
                   android: {
-                    // marginBottom: isShowKeyboard ? 40 : 0,
+                    top: -44,
                   },
                 }),
               }}

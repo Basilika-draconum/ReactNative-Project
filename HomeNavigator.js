@@ -2,7 +2,6 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useNavigation } from "@react-navigation/native";
 import { Platform, TouchableOpacity } from "react-native";
-import { createStackNavigator } from "@react-navigation/stack";
 
 const MainTable = createBottomTabNavigator();
 //Screens
@@ -17,7 +16,6 @@ import { useDispatch } from "react-redux";
 import { logoutThunk } from "./redux/auth/authOparations";
 
 export const HomeNavigator = () => {
-  const navigation = useNavigation();
   const dispatch = useDispatch();
 
   return (

@@ -10,7 +10,7 @@ import { Entypo } from "@expo/vector-icons";
 import { styles } from "./defaultPostsScreenStyles";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-const DefaultPostsScreen = ({ route, navigation }) => {
+const DefaultPostsScreen = ({ navigation }) => {
   const [posts, setPosts] = useState([]);
 
   const user = useSelector(({ auth }) => auth);

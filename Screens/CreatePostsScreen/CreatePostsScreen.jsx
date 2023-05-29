@@ -107,13 +107,12 @@ const CreatePostsScreen = ({ navigation }) => {
     try {
       const picture = await uploadPhotoToServer();
 
-      const docRef = await addDoc(collection(db, "posts"), {
+      await addDoc(collection(db, "posts"), {
         picture,
         title,
         location,
         userId,
       });
-      console.log("Document written with ID: ", docRef.id);
     } catch (error) {
       console.log(error);
     }
